@@ -1,51 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-
-<body>
-
-    <header>
-        <h1>Ryan Dickinson</h1>
-        <nav>
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#education">Education</a></li>
-                <li><a href="projects.html">Projects</a></li>
-                <li><a href="contact.html">Contact Me</a></li>
-            </ul>
-        </nav>
-    </header>
-
-    <section id="about">
-        <div class="me">
-            <h2>About Me</h2>
-            <p>Welcome to my portfolio! I'm a web developer passionate about creating beautiful and functional websites.
-            </p>
-            <p>My primary goal is client satisfaction. I will deliver exceptional products for a variety of uses on the
-                web.</p>
-        </div>
-        <div class="background">
-            <h3 id="education">Background and Education</h3>
-            <p>I have obtained a Bachelor of Science in Mobile & Web App Development from Northern Michigan University
-                located in the beautiful Marquette, MI.</p>
-            <img src="assets/marquette.webp" alt="A view of Marquette">
-            <p>During my time at university, I focused on web development, gaining expertise in HTML, CSS, JavaScript,
-                and various web development frameworks/libraries.</p>
-        </div>
-        <div class="resume-download">
-            <a href="/assets/Ryan_Dickinson_Resume_2024.pdf" download class="btn btn-primary">Download My Resume</a>
-        </div>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 Ryan Dickinson's Portfolio. All rights reserved.</p>
-    </footer>
-</body>
-
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ryan Dickinson | Developer</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <style>
+      /* Critical inline styles to prevent FOUC */
+      body { background-color: #0a0a0a; color: #e5e5e5; margin: 0; }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" /></noscript>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>
