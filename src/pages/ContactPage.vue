@@ -1,6 +1,8 @@
 <template>
   <div class="max-w-xl mx-auto px-6 py-16 md:py-24">
     <h1 class="text-3xl md:text-4xl font-bold tracking-tight mb-4 animate-fade-up"><span class="gradient-text">Contact</span></h1>
+
+    <template v-if="!submitted">
     <p class="text-muted mb-2">
       Have a question or want to work together? Drop me a message or email me at
       <a href="mailto:hello@rndx.dev" class="text-accent hover:underline transition-colors">hello@rndx.dev</a>.
@@ -10,7 +12,6 @@
     </p>
 
     <form
-      v-if="!submitted"
       name="contact"
       method="POST"
       data-netlify="true"
@@ -72,6 +73,7 @@
         Send Message
       </button>
     </form>
+    </template>
 
     <div v-else class="text-center py-12" role="alert" aria-live="polite">
       <p class="text-lg text-text mb-2">Message sent!</p>
