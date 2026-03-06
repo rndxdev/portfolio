@@ -1,6 +1,6 @@
 <template>
   <router-link :to="`/blog/${post.slug}`" :aria-label="`Read ${post.title}`" class="group block gradient-border p-6 rounded-xl bg-surface transition-all duration-300 hover:-translate-y-1">
-    <time class="text-xs font-mono text-accent">{{ formatDate(post.date) }}</time>
+    <time class="text-xs font-mono text-accent" :datetime="post.date.toISOString().split('T')[0]">{{ formatDate(post.date) }}</time>
     <h3 class="text-lg font-semibold mt-2 group-hover:text-text transition-colors duration-300">
       {{ post.title }}
     </h3>

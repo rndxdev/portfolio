@@ -114,3 +114,26 @@ body {
 .animate-float {
   animation: float 3s ease-in-out infinite;
 }
+
+/* Respect reduced motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-delay-1,
+  .animate-delay-2,
+  .animate-delay-3,
+  .animate-delay-4,
+  .animate-delay-5 {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .animate-pulse-dot,
+  .animate-float {
+    animation: none;
+  }
+
+  .gradient-border {
+    transition: none;
+  }
+}

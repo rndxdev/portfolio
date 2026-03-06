@@ -13,6 +13,7 @@
     <div v-if="allTags.length" class="flex flex-wrap gap-2 mb-10" role="group" aria-label="Filter posts by tag">
       <button
         @click="activeTag = null"
+        :aria-pressed="activeTag === null"
         class="text-xs font-mono px-3 py-1.5 rounded-full border transition-all duration-200"
         :class="activeTag === null ? 'border-accent bg-accent/15 text-accent' : 'border-border text-muted hover:border-accent/40 hover:text-text'"
       >
@@ -22,6 +23,7 @@
         v-for="tag in allTags"
         :key="tag"
         @click="activeTag = activeTag === tag ? null : tag"
+        :aria-pressed="activeTag === tag"
         class="text-xs font-mono px-3 py-1.5 rounded-full border transition-all duration-200"
         :class="activeTag === tag ? 'border-accent bg-accent/15 text-accent' : 'border-border text-muted hover:border-accent/40 hover:text-text'"
       >
@@ -39,7 +41,7 @@
         >
           <div class="flex items-center gap-3 mb-4">
             <span class="text-xs font-mono px-2.5 py-1 rounded-full bg-accent/15 border border-accent/30 text-accent">Latest</span>
-            <time class="text-xs font-mono text-muted">{{ formatDate(filteredPosts[0].date) }}</time>
+            <time class="text-xs font-mono text-muted" :datetime="filteredPosts[0].date.toISOString().split('T')[0]">{{ formatDate(filteredPosts[0].date) }}</time>
             <span class="text-xs text-muted" aria-label="estimated reading time">{{ readTime(filteredPosts[0].content) }}</span>
           </div>
           <h2 class="text-2xl md:text-3xl font-bold tracking-tight group-hover:text-accent transition-colors duration-300">
@@ -71,10 +73,10 @@
             :aria-label="`Read ${post.title}`"
             class="group flex items-start gap-6 py-6 border-b border-border/50 transition-colors duration-200 hover:border-accent/30"
           >
-            <time class="text-xs font-mono text-muted whitespace-nowrap pt-1.5 hidden sm:block min-w-[7rem]">{{ formatDate(post.date) }}</time>
+            <time class="text-xs font-mono text-muted whitespace-nowrap pt-1.5 hidden sm:block min-w-[7rem]" :datetime="post.date.toISOString().split('T')[0]">{{ formatDate(post.date) }}</time>
             <div class="flex-1 min-w-0">
               <div class="flex items-center gap-3 mb-1 sm:hidden">
-                <time class="text-xs font-mono text-muted">{{ formatDate(post.date) }}</time>
+                <time class="text-xs font-mono text-muted" :datetime="post.date.toISOString().split('T')[0]">{{ formatDate(post.date) }}</time>
                 <span class="text-xs text-muted">{{ readTime(post.content) }}</span>
               </div>
               <h3 class="text-lg font-semibold group-hover:text-accent transition-colors duration-200 leading-snug">

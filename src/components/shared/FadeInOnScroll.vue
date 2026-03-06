@@ -11,7 +11,14 @@ const el = ref(null)
 const visible = ref(false)
 let observer
 
+const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
 onMounted(() => {
+  if (prefersReducedMotion) {
+    visible.value = true
+    return
+  }
+
   observer = new IntersectionObserver(
     ([entry]) => {
       if (entry.isIntersecting) {

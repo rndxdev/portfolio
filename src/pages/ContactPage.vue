@@ -2,7 +2,8 @@
   <div class="max-w-xl mx-auto px-6 py-16 md:py-24">
     <h1 class="text-3xl md:text-4xl font-bold tracking-tight mb-4 animate-fade-up"><span class="gradient-text">Contact</span></h1>
     <p class="text-muted mb-2">
-      Have a question or want to work together? Drop me a message.
+      Have a question or want to work together? Drop me a message or email me at
+      <a href="mailto:hello@rndx.dev" class="text-accent hover:underline transition-colors">hello@rndx.dev</a>.
     </p>
     <p class="text-sm text-muted mb-10">
       Fields marked with <span class="text-rose">*</span> are required.
@@ -31,7 +32,7 @@
           type="text"
           required
           aria-required="true"
-          class="w-full px-4 py-3 bg-surface border border-border rounded-lg text-text placeholder-muted focus:border-accent focus:ring-2 focus:ring-accent/40 focus:outline-none transition-colors"
+          class="w-full px-4 py-3 bg-surface border border-border rounded-lg text-text placeholder-muted focus:border-accent focus:ring-2 focus:ring-accent/40 focus-visible:outline-none transition-colors"
           placeholder="Your name"
         />
       </div>
@@ -45,7 +46,7 @@
           type="email"
           required
           aria-required="true"
-          class="w-full px-4 py-3 bg-surface border border-border rounded-lg text-text placeholder-muted focus:border-accent focus:ring-2 focus:ring-accent/40 focus:outline-none transition-colors"
+          class="w-full px-4 py-3 bg-surface border border-border rounded-lg text-text placeholder-muted focus:border-accent focus:ring-2 focus:ring-accent/40 focus-visible:outline-none transition-colors"
           placeholder="you@example.com"
         />
       </div>
@@ -59,7 +60,7 @@
           required
           aria-required="true"
           rows="5"
-          class="w-full px-4 py-3 bg-surface border border-border rounded-lg text-text placeholder-muted focus:border-accent focus:ring-2 focus:ring-accent/40 focus:outline-none transition-colors resize-none"
+          class="w-full px-4 py-3 bg-surface border border-border rounded-lg text-text placeholder-muted focus:border-accent focus:ring-2 focus:ring-accent/40 focus-visible:outline-none transition-colors resize-none"
           placeholder="What's on your mind?"
         />
       </div>

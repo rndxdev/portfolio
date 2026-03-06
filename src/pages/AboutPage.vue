@@ -9,7 +9,7 @@
           <div
             class="absolute -inset-1 rounded-full bg-gradient-to-r from-accent via-cyan to-emerald opacity-60 blur-sm group-hover:opacity-100 transition-opacity duration-500"
             style="animation: gradient-shift 4s ease infinite; background-size: 200% 200%;" aria-hidden="true" />
-          <img :src="avatarUrl" alt="" class="relative w-28 h-28 rounded-full border-2 border-bg" />
+          <img :src="avatarUrl" alt="Ryan Dickinson" class="relative w-28 h-28 rounded-full border-2 border-bg" />
         </div>
       </a>
       <div class="text-center sm:text-left">
@@ -64,7 +64,7 @@
       <div class="grid grid-cols-2 md:grid-cols-3 gap-3 animate-fade-up animate-delay-5">
         <template v-for="(tech, i) in stack" :key="tech.name">
           <!-- SQL card with hover dropdown -->
-          <div v-if="tech.flavors" class="relative group" tabindex="0">
+          <div v-if="tech.flavors" class="relative group" tabindex="0" role="button" aria-haspopup="true" :aria-expanded="sqlExpanded" @keydown.escape="blurSql" @focus="sqlExpanded = true" @blur.capture="handleSqlBlur" @mouseenter="sqlExpanded = true" @mouseleave="sqlExpanded = false">
             <div
               class="text-sm font-mono px-3 py-2.5 rounded-lg border text-center cursor-default transition-all duration-300 hover:-translate-y-0.5 hover:scale-105 group-focus:-translate-y-0.5 group-focus:scale-105"
               :class="techColor(i)">
@@ -91,6 +91,7 @@
           </div>
           <!-- Regular tech card -->
           <a v-else :href="tech.url" target="_blank" rel="noopener noreferrer"
+            :aria-label="`${tech.name} (opens in new tab)`"
             class="text-sm font-mono px-3 py-2.5 rounded-lg border text-center transition-all duration-300 hover:-translate-y-0.5 hover:scale-105"
             :class="techColor(i)">
             {{ tech.name }}
@@ -109,9 +110,26 @@
 </template>
 
 <script setup>
+import { ref } from 'vue'
+
 const githubUsername = 'rndxdev'
 const githubUrl = `https://github.com/${githubUsername}`
 const avatarUrl = `https://github.com/${githubUsername}.png`
+const sqlExpanded = ref(false)
+
+function blurSql(e) {
+  e.target.closest('[role="button"]').blur()
+  sqlExpanded.value = false
+}
+
+function handleSqlBlur(e) {
+  const container = e.target.closest('[role="button"]')
+  setTimeout(() => {
+    if (container && !container.contains(document.activeElement)) {
+      sqlExpanded.value = false
+    }
+  }, 0)
+}
 
 const stack = [
   { name: 'PHP/Laravel', url: 'https://laravel.com' },
