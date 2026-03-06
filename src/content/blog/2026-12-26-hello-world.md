@@ -35,6 +35,6 @@ I'm not trying to write tutorials or chase trends. This is just an honest space 
 
 ## Let's Connect
 
-You can find me on [GitHub](https://github.com/rndxdev) or reach out at [ryandickinson54@gmail.com](mailto:ryandickinson54@gmail.com). If you're into ice fishing, open source, or both — we'll probably get along.
+You can find me on [GitHub](https://github.com/rndxdev) or reach out at [hello@rndx.dev](mailto:hello@rndx.dev). If you're into ice fishing, open source, or both — we'll probably get along.
 
 Thanks for stopping by.
