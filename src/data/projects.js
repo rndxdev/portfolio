@@ -18,6 +18,24 @@ export const projects = [
     featured: true,
   },
   {
+    title: "BattMon",
+    description:
+      "A lightweight Linux battery monitoring tool for developers. Get real-time battery stats right from your terminal.",
+    tech: ["C", "Linux"],
+    github: "https://github.com/rndxdev/battmon",
+    live: null,
+    featured: false,
+  },
+  {
+    title: "DevDash",
+    description:
+      "A terminal-based developer dashboard for Linux. Quick access to system info and productivity metrics without leaving the command line.",
+    tech: ["C", "Linux"],
+    github: "https://github.com/rndxdev/devdash",
+    live: null,
+    featured: false,
+  },
+  {
     title: "TruthCrawl",
     description:
       "An early-stage, open source tamper-evident transparency log for web crawl observations. Built with cryptographic signing, Merkle trees, and append-only logs to verify what was on a page and when. Contributors welcome!",
