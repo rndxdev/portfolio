@@ -46,15 +46,6 @@ export const projects = [
     featured: false,
   },
   {
-    title: "TruthCrawl",
-    description:
-      "An early-stage, open source tamper-evident transparency log for web crawl observations. Built with cryptographic signing, Merkle trees, and append-only logs to verify what was on a page and when. Contributors welcome!",
-    tech: ["Java 21", "Maven", "Docker", "JUnit 5"],
-    github: "https://github.com/rndxdev/truthcrawl",
-    live: null,
-    featured: false,
-  },
-  {
     title: "Portfolio",
     description:
       "This site — a Vue 3 SPA with a markdown-based blog, Tailwind CSS, and deployed on Netlify. Designed for speed and simplicity.",
