@@ -36,6 +36,16 @@ export const projects = [
     featured: false,
   },
   {
+    title: "Swarmada",
+    type: "game",
+    description:
+      "A survival arcade game where you pilot the last Vanguard fighter against endless alien waves. Features procedural graphics, synthesized audio, boss encounters, upgrades, and a replay-verified global leaderboard — no third-party assets.",
+    tech: ["Python", "Pygame", "WebAssembly", "Pygbag"],
+    github: "https://github.com/rndxdev/swarmada",
+    live: "https://rndxdev.github.io/swarmada/",
+    featured: false,
+  },
+  {
     title: "TruthCrawl",
     description:
       "An early-stage, open source tamper-evident transparency log for web crawl observations. Built with cryptographic signing, Merkle trees, and append-only logs to verify what was on a page and when. Contributors welcome!",
