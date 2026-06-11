@@ -122,6 +122,6 @@ mkcd new-project           # mkdir + cd in one shot
 
 Because nothing teaches you how Unix works like implementing it yourself. Every pipe is a `fork` + `exec` + `dup2`. Every redirect is an `open` + file descriptor shuffle. Every background job is a process group you have to track, wait on, and report.
 
-shelloveu started as a CS426 course project and grew into something I actually use. It's not done — glob expansion, `&&`/`||` chaining, and `fg`/`bg` are all on the roadmap — but it's already usable, and every feature is something I built because I wanted it.
+shelloveu started as an Operating Systems course project and grew into something I actually use. It's not done — glob expansion, `&&`/`||` chaining, and `fg`/`bg` are all on the roadmap — but it's already usable, and every feature is something I built because I wanted it.
 
 Check it out on [GitHub](https://github.com/rndxdev/shelloveu) and give it a spin.
