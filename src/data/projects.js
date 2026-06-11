@@ -2,7 +2,7 @@ export const projects = [
   {
     title: "ShellOveU",
     description:
-      "A featureful Unix shell written from scratch in C++17. Ships with a built-in file manager (ranger-style TUI with cd-on-quit), a kilo-inspired text editor, a sixel/half-block image viewer with EXIF support, and even a hidden dino runner game. Pipelines, redirections, job control, safety fuse for rm -rf, structured history logging, and a themeable prompt with git-branch awareness — all in one binary.",
+      "A Unix shell built from scratch in C++17 with a built-in file manager, text editor, image viewer, and hidden dino game. Pipelines, job control, rm -rf safety fuse, and a git-aware prompt — all in one binary.",
     tech: ["C++17", "GNU Readline", "Sixel Graphics", "Raw-mode TUI"],
     github: "https://github.com/rndxdev/shelloveu",
     live: null,
