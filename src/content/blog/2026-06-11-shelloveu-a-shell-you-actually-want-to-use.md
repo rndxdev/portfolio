@@ -16,12 +16,18 @@ But the shell is just the beginning. shelloveu ships with a **built-in file mana
 
 ## The Shell
 
-At its core, shelloveu handles everything you'd expect from a real shell:
+At its core, shelloveu handles everything you'd expect from a real shell — and then some:
 
 - **Pipelines** — `cat log.txt | grep ERROR | sort | uniq -c`
-- **Redirections** — `<`, `>`, `>>`, `2>`, `&>`, fd-specific forms like `2>/dev/null`
-- **Background jobs** — `make -j8 &` then `jobs` to check on it
-- **Tab completion**, arrow-key history, `Ctrl-C` handling
+- **Redirections** — `<`, `>`, `>>`, `2>`, `&>`, heredocs (`<<`), fd duplication (`2>&1`)
+- **Globs** — `*.txt`, `file?.log`, `[a-z]*`
+- **Variable expansion** — `$VAR`, `${VAR}`, `$?`, `$$`, plus `export`/`unset`
+- **Command substitution** — `$(...)` and backticks
+- **Control flow** — `;`, `&&`, `||`
+- **Scripting** — `if`/`for`/`while`/`until`, `break`/`continue`, functions with positional params
+- **Job control** — background jobs, `fg`/`bg`/`kill`, `%N` references, `Ctrl-Z` suspend
+- **Live syntax highlighting** and **history autosuggestions** as you type
+- **Tab completion** for builtins, aliases, and `$PATH` commands
 - **Structured history** — every command is logged to `~/.shelloveu/history.jsonl` with timestamps, working directory, exit code, and duration
 
 The prompt is themeable and git-aware — it shows your current directory, branch, last exit code, and how many background jobs are running.
@@ -122,6 +128,6 @@ mkcd new-project           # mkdir + cd in one shot
 
 Because nothing teaches you how Unix works like implementing it yourself. Every pipe is a `fork` + `exec` + `dup2`. Every redirect is an `open` + file descriptor shuffle. Every background job is a process group you have to track, wait on, and report.
 
-shelloveu started as an Operating Systems course project and grew into something I actually use. It's not done — glob expansion, `&&`/`||` chaining, and `fg`/`bg` are all on the roadmap — but it's already usable, and every feature is something I built because I wanted it.
+shelloveu started as an Operating Systems course project and grew into something I actually use. Globs, `&&`/`||` chaining, `fg`/`bg`, scripting, syntax highlighting, autosuggestions — all shipped. Every feature is something I built because I wanted it.
 
 Check it out on [GitHub](https://github.com/rndxdev/shelloveu) and give it a spin.
