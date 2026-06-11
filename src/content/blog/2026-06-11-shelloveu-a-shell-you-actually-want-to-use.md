@@ -1,22 +1,22 @@
 ---
-title: "ShellOveU — A Shell You Actually Want to Use"
+title: "shelloveu — A Shell You Actually Want to Use"
 date: 2026-06-11
 description: "I built a Unix shell from scratch in C++17 with a file manager, text editor, image viewer, and a hidden dinosaur game. Here's how to use it."
 tags: ["c++", "linux", "terminal", "open-source", "project"]
 published: true
 ---
 
-# ShellOveU — A Shell You Actually Want to Use
+# shelloveu — A Shell You Actually Want to Use
 
 What if your shell came with batteries included?
 
-**ShellOveU** is a Unix shell I wrote from scratch in C++17. Not a wrapper around bash. Not a plugin for zsh. A full shell — tokenizer, parser, pipeline executor, job control — built on GNU Readline and designed to be something you'd actually want as your daily driver.
+**shelloveu** is a Unix shell I wrote from scratch in C++17. Not a wrapper around bash. Not a plugin for zsh. A full shell — tokenizer, parser, pipeline executor, job control — built on GNU Readline and designed to be something you'd actually want as your daily driver.
 
-But the shell is just the beginning. ShellOveU ships with a **built-in file manager**, a **text editor**, a **sixel image viewer**, and yes — a **hidden dinosaur runner game**. All in one binary.
+But the shell is just the beginning. shelloveu ships with a **built-in file manager**, a **text editor**, a **sixel image viewer**, and yes — a **hidden dinosaur runner game**. All in one binary.
 
 ## The Shell
 
-At its core, ShellOveU handles everything you'd expect from a real shell:
+At its core, shelloveu handles everything you'd expect from a real shell:
 
 - **Pipelines** — `cat log.txt | grep ERROR | sort | uniq -c`
 - **Redirections** — `<`, `>`, `>>`, `2>`, `&>`, fd-specific forms like `2>/dev/null`
@@ -28,7 +28,7 @@ The prompt is themeable and git-aware — it shows your current directory, branc
 
 ### Safety fuse
 
-Run `rm -rf /` by accident? ShellOveU catches dangerous `rm` patterns before they execute. Toggle it with `set safety=on` in your `~/.shelloveurc`.
+Run `rm -rf /` by accident? shelloveu catches dangerous `rm` patterns before they execute. Toggle it with `set safety=on` in your `~/.shelloveurc`.
 
 ## The File Manager — `fm`
 
@@ -59,7 +59,7 @@ Set `export EDITOR=edit` and the file manager will open files in it automaticall
 
 ## The Image Viewer
 
-Browse to an image in `fm` and it renders right in your terminal. ShellOveU supports two rendering backends:
+Browse to an image in `fm` and it renders right in your terminal. shelloveu supports two rendering backends:
 
 - **Sixel graphics** — real pixel-resolution images with 256-color median-cut quantization, Floyd-Steinberg dithering, and run-length encoding. Works in Windows Terminal 1.22+, xterm, foot, and mlterm.
 - **Half-block fallback** — uses the `▀` character with 24-bit foreground/background colors. Two pixels per cell. Works everywhere.
@@ -68,7 +68,7 @@ For JPEGs, it even parses EXIF data and shows you camera model, date taken, and 
 
 ## The Dinosaur Game
 
-Type `dino` and ShellOveU launches a Chrome-dinosaur-style ASCII runner. Jump cacti with `Space`, `Up`, or `W`. The game speeds up the longer you survive, and your high score is saved to `~/.shelloveu/dino_highscore`.
+Type `dino` and shelloveu launches a Chrome-dinosaur-style ASCII runner. Jump cacti with `Space`, `Up`, or `W`. The game speeds up the longer you survive, and your high score is saved to `~/.shelloveu/dino_highscore`.
 
 It's completely pointless and I love it.
 
@@ -122,6 +122,6 @@ mkcd new-project           # mkdir + cd in one shot
 
 Because nothing teaches you how Unix works like implementing it yourself. Every pipe is a `fork` + `exec` + `dup2`. Every redirect is an `open` + file descriptor shuffle. Every background job is a process group you have to track, wait on, and report.
 
-ShellOveU started as a CS426 course project and grew into something I actually use. It's not done — glob expansion, `&&`/`||` chaining, and `fg`/`bg` are all on the roadmap — but it's already usable, and every feature is something I built because I wanted it.
+shelloveu started as a CS426 course project and grew into something I actually use. It's not done — glob expansion, `&&`/`||` chaining, and `fg`/`bg` are all on the roadmap — but it's already usable, and every feature is something I built because I wanted it.
 
 Check it out on [GitHub](https://github.com/rndxdev/shelloveu) and give it a spin.

@@ -1,6 +1,6 @@
 export const projects = [
   {
-    title: "ShellOveU",
+    title: "shelloveu",
     description:
       "A Unix shell built from scratch in C++17 with a built-in file manager, text editor, image viewer, and hidden dino game. Pipelines, job control, rm -rf safety fuse, and a git-aware prompt — all in one binary.",
     tech: ["C++17", "GNU Readline", "Sixel Graphics", "Raw-mode TUI"],
