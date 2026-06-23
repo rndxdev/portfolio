@@ -8,11 +8,11 @@
     </p>
 
     <ul
-      v-if="certifications.length"
+      v-if="sortedCertifications.length"
       class="grid gap-6 sm:grid-cols-2"
       aria-label="List of certifications"
     >
-      <li v-for="cert in certifications" :key="cert.credentialId || cert.title">
+      <li v-for="cert in sortedCertifications" :key="cert.credentialId || cert.title">
         <CertCard :cert="cert" />
       </li>
     </ul>
@@ -22,6 +22,12 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import CertCard from '../components/certifications/CertCard.vue'
 import { certifications } from '../data/certifications.js'
+
+// Lead with the longest courses (depth over recency).
+const sortedCertifications = computed(() =>
+  [...certifications].sort((a, b) => (parseFloat(b.length) || 0) - (parseFloat(a.length) || 0))
+)
 </script>

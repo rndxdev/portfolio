@@ -17,10 +17,7 @@
         <p class="text-sm text-muted mt-1">
           {{ cert.issuer }}<template v-if="cert.instructor"> · {{ cert.instructor }}</template>
         </p>
-        <p class="text-sm text-muted mt-0.5">
-          <span>Issued {{ cert.date }}</span>
-          <template v-if="cert.length"> · {{ cert.length }}</template>
-        </p>
+        <p v-if="cert.length" class="text-sm text-muted mt-0.5">{{ cert.length }}</p>
       </div>
     </div>
 
