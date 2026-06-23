@@ -1,5 +1,15 @@
 export const certifications = [
   {
+    title: "React Front To Back",
+    issuer: "Udemy",
+    instructor: "Brad Traversy",
+    date: "June 2026",
+    length: "20 hours",
+    credentialId: "UC-ad5d0ff9-e748-4b7e-ac27-766301e20acd",
+    url: "https://ude.my/UC-ad5d0ff9-e748-4b7e-ac27-766301e20acd",
+    skills: ["React", "Hooks", "Context API", "React Router", "REST API"],
+  },
+  {
     title: "Modern JavaScript From The Beginning 2.0",
     issuer: "Udemy",
     instructor: "Brad Traversy",
