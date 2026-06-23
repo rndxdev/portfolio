@@ -1,5 +1,15 @@
 export const certifications = [
   {
+    title: "PHP From Scratch — Beginner To Advanced",
+    issuer: "Udemy",
+    instructor: "Brad Traversy",
+    date: "June 2026",
+    length: "18.5 hours",
+    credentialId: "UC-d5345dec-4630-4b68-b6cc-5d3064d6adf3",
+    url: "https://ude.my/UC-d5345dec-4630-4b68-b6cc-5d3064d6adf3",
+    skills: ["PHP", "OOP", "PDO", "Sessions", "Authentication"],
+  },
+  {
     title: "Introduction to Web Accessibility — WCAG 2.2",
     issuer: "Udemy",
     instructor: "Ross Mullen",
