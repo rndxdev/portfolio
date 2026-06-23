@@ -19,4 +19,14 @@ export const certifications = [
     url: "https://ude.my/UC-b7cc86fb-8405-47aa-84e0-d3c17d435f07",
     skills: ["Laravel 12", "Vue 3", "SPA", "REST API", "Sanctum"],
   },
+  {
+    title: "Object Oriented PHP & MVC",
+    issuer: "Udemy",
+    instructor: "Brad Traversy",
+    date: "August 2024",
+    length: "6.5 hours",
+    credentialId: "UC-5bbb91f7-9a65-4477-8fea-66cfee1c7d09",
+    url: "https://ude.my/UC-5bbb91f7-9a65-4477-8fea-66cfee1c7d09",
+    skills: ["OOP", "PHP", "MVC", "Routing", "PDO"],
+  },
 ];
