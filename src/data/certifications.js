@@ -1,5 +1,15 @@
 export const certifications = [
   {
+    title: "Modern JavaScript From The Beginning 2.0",
+    issuer: "Udemy",
+    instructor: "Brad Traversy",
+    date: "June 2026",
+    length: "40 hours",
+    credentialId: "UC-5275abee-2009-49e0-8105-e82ed451a966",
+    url: "https://ude.my/UC-5275abee-2009-49e0-8105-e82ed451a966",
+    skills: ["JavaScript", "ES2023", "Async/Await", "DOM", "Web APIs"],
+  },
+  {
     title: "PHP From Scratch — Beginner To Advanced",
     issuer: "Udemy",
     instructor: "Brad Traversy",
