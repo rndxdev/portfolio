@@ -50,6 +50,7 @@
         Most of my free time aside from my day job goes into open source work and side projects. My biggest project
         right now is the
         <a href="https://github.com/rndxdev/safe-ice-tool" target="_blank" rel="noopener noreferrer"
+          aria-label="SIT (Safe Ice Tool) on GitHub (opens in new tab)"
           class="text-accent hover:text-text hover:underline transition-colors duration-300">SIT (Safe Ice Tool)</a>
         — Stay In The Knowledge, or sit at home if conditions aren't safe. It's a community-driven platform that helps
         people share real-time ice conditions. It started because I spend a lot of time ice fishing in Michigan and saw

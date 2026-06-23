@@ -20,10 +20,11 @@
 
       <!-- Mobile hamburger -->
       <button
-        class="md:hidden text-muted hover:text-text transition-colors"
+        class="md:hidden -mr-2 min-w-[44px] min-h-[44px] flex items-center justify-center text-muted hover:text-text transition-colors"
         @click="mobileOpen = !mobileOpen"
-        aria-label="Toggle menu"
+        :aria-label="mobileOpen ? 'Close menu' : 'Open menu'"
         :aria-expanded="mobileOpen"
+        aria-controls="mobile-menu"
       >
         <svg v-if="!mobileOpen" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16" />
@@ -36,13 +37,13 @@
 
     <!-- Mobile menu -->
     <transition name="slide">
-      <div v-if="mobileOpen" class="md:hidden border-t border-border bg-bg/95 backdrop-blur-md">
-        <div class="px-6 py-4 flex flex-col gap-4">
+      <div v-if="mobileOpen" id="mobile-menu" class="md:hidden border-t border-border bg-bg/95 backdrop-blur-md">
+        <div class="px-6 py-2 flex flex-col">
           <router-link
             v-for="link in links"
             :key="link.to"
             :to="link.to"
-            class="text-sm text-muted hover:text-text transition-colors"
+            class="text-sm text-muted hover:text-text transition-colors flex items-center min-h-[44px]"
             active-class="text-accent!"
             @click="mobileOpen = false"
           >
@@ -61,6 +62,7 @@ const mobileOpen = ref(false)
 const links = [
   { to: '/about', label: 'About' },
   { to: '/projects', label: 'Projects' },
+  { to: '/certifications', label: 'Certs' },
   { to: '/blog', label: 'Blog' },
   { to: '/contact', label: 'Contact' },
 ]

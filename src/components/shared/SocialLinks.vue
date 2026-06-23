@@ -1,13 +1,13 @@
 <template>
-  <div class="flex items-center gap-5">
+  <div class="flex items-center gap-1 -mx-2">
     <a
       v-for="link in socials"
       :key="link.label"
       :href="link.href"
       :target="link.external ? '_blank' : undefined"
       :rel="link.external ? 'noopener noreferrer' : undefined"
-      class="text-muted hover:text-text transition-colors"
-      :aria-label="link.label"
+      class="inline-flex items-center justify-center min-w-[44px] min-h-[44px] text-muted hover:text-text transition-colors"
+      :aria-label="link.external ? `${link.label} (opens in new tab)` : link.label"
     >
       <svg class="w-5 h-5" v-bind="link.svgAttrs" aria-hidden="true">
         <path v-bind="link.pathAttrs" />
