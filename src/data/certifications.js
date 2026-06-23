@@ -1,5 +1,15 @@
 export const certifications = [
   {
+    title: "The Complete Web Developer Course 3.0",
+    issuer: "Udemy",
+    instructor: "Rob Percival · Codestars",
+    date: "June 2026",
+    length: "31 hours",
+    credentialId: "UC-31d5ce1f-5e18-4a06-9de6-f75f8b5d835f",
+    url: "https://ude.my/UC-31d5ce1f-5e18-4a06-9de6-f75f8b5d835f",
+    skills: ["HTML5", "CSS3", "JavaScript", "PHP", "MySQL"],
+  },
+  {
     title: "React Front To Back",
     issuer: "Udemy",
     instructor: "Brad Traversy",
