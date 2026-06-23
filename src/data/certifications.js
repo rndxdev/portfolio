@@ -1,5 +1,15 @@
 export const certifications = [
   {
+    title: "NodeJS — The Complete Guide (MVC, REST APIs, GraphQL, Deno)",
+    issuer: "Udemy",
+    instructor: "Maximilian Schwarzmüller · Academind",
+    date: "June 2026",
+    length: "40.5 hours",
+    credentialId: "UC-28a17475-19b1-4688-afe2-adee501628a1",
+    url: "https://ude.my/UC-28a17475-19b1-4688-afe2-adee501628a1",
+    skills: ["Node.js", "Express", "REST API", "GraphQL", "Deno"],
+  },
+  {
     title: "The Complete Web Developer Course 3.0",
     issuer: "Udemy",
     instructor: "Rob Percival · Codestars",
