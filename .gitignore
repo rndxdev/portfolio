@@ -3,3 +3,8 @@ node_modules
 dist
 .DS_Store
 *.local
+
+# Working assets (not used by the site)
+clip.mp4
+palette.png
+swarmada.gif
