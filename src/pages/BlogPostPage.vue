@@ -31,15 +31,45 @@
 </template>
 
 <script setup>
+import { useHead } from '@unhead/vue'
 import { useRoute } from 'vue-router'
 import PostContent from '../components/blog/PostContent.vue'
 import ShareButtons from '../components/blog/ShareButtons.vue'
 import { usePosts } from '../composables/usePosts.js'
+import { useSeo } from '../composables/useSeo.js'
+import { SITE_URL, SITE_NAME } from '../site.config.js'
 
 const route = useRoute()
 const { getPost } = usePosts()
 const post = getPost(route.params.slug)
-const shareUrl = typeof window !== 'undefined' ? window.location.href : ''
+const shareUrl = SITE_URL + route.path
+
+useSeo({
+  title: post ? post.title : 'Post not found',
+  description: post ? post.description : undefined,
+  type: 'article',
+})
+
+// BlogPosting schema so each article is understood as content authored by Ryan.
+if (post) {
+  useHead({
+    script: [
+      {
+        type: 'application/ld+json',
+        innerHTML: JSON.stringify({
+          '@context': 'https://schema.org',
+          '@type': 'BlogPosting',
+          headline: post.title,
+          description: post.description,
+          datePublished: post.date.toISOString().split('T')[0],
+          url: shareUrl,
+          keywords: post.tags,
+          author: { '@type': 'Person', name: SITE_NAME, url: SITE_URL },
+        }),
+      },
+    ],
+  })
+}
 
 function formatDate(date) {
   return date.toLocaleDateString('en-US', {

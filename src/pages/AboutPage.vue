@@ -100,6 +100,8 @@
         </template>
       </div>
 
+      <GitHubActivity :username="githubUsername" class="animate-fade-up animate-delay-5" />
+
       <h2 class="text-xl font-semibold text-text pt-4">Outside the code editor</h2>
       <p>
         When I'm not writing code, I'm usually outside — fishing, hiking, hunting, and exploring the beautiful outdoors
@@ -112,6 +114,14 @@
 
 <script setup>
 import { ref } from 'vue'
+import GitHubActivity from '../components/github/GitHubActivity.vue'
+import { useSeo } from '../composables/useSeo.js'
+
+useSeo({
+  title: 'About',
+  description:
+    'Ryan Dickinson is a full-stack developer from Michigan focused on open-source tools, built with Laravel, Vue, and C++. Get to know his work, stack, and GitHub activity.',
+})
 
 const githubUsername = 'rndxdev'
 const githubUrl = `https://github.com/${githubUsername}`

@@ -5,6 +5,4 @@ dist
 *.local
 
 # Working assets (not used by the site)
-clip.mp4
-palette.png
-swarmada.gif
+/media

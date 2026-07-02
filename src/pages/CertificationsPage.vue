@@ -25,6 +25,13 @@
 import { computed } from 'vue'
 import CertCard from '../components/certifications/CertCard.vue'
 import { certifications } from '../data/certifications.js'
+import { useSeo } from '../composables/useSeo.js'
+
+useSeo({
+  title: 'Certifications',
+  description:
+    'Verified coursework and credentials earned by Ryan Dickinson — covering Node.js, React, Vue, Laravel, PHP, JavaScript, and web accessibility.',
+})
 
 // Lead with the longest courses (depth over recency).
 const sortedCertifications = computed(() =>

@@ -1,6 +1,34 @@
-import { createApp } from 'vue'
+import { ViteSSG } from 'vite-ssg'
 import App from './App.vue'
-import router from './router'
+import { routes } from './router'
+import { SITE_TITLE, SITE_DESCRIPTION, SITE_URL, SITE_NAME, OG_IMAGE, SITE_LOCALE } from './site.config'
 import './styles/global.css'
 
-createApp(App).use(router).mount('#app')
+export const createApp = ViteSSG(
+  App,
+  {
+    routes,
+    scrollBehavior() {
+      return { top: 0 }
+    },
+  },
+  ({ head }) => {
+    // Site-wide default head — pages override title/description via useSeo().
+    head?.push({
+      title: SITE_TITLE,
+      meta: [
+        { name: 'description', content: SITE_DESCRIPTION },
+        { property: 'og:site_name', content: SITE_NAME },
+        { property: 'og:type', content: 'website' },
+        { property: 'og:locale', content: SITE_LOCALE },
+        { property: 'og:title', content: SITE_TITLE },
+        { property: 'og:description', content: SITE_DESCRIPTION },
+        { property: 'og:image', content: SITE_URL + OG_IMAGE },
+        { name: 'twitter:card', content: 'summary_large_image' },
+        { name: 'twitter:title', content: SITE_TITLE },
+        { name: 'twitter:description', content: SITE_DESCRIPTION },
+        { name: 'twitter:image', content: SITE_URL + OG_IMAGE },
+      ],
+    })
+  },
+)

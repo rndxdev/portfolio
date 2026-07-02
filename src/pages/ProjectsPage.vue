@@ -11,4 +11,11 @@
 <script setup>
 import ProjectGrid from '../components/projects/ProjectGrid.vue'
 import { projects } from '../data/projects.js'
+import { useSeo } from '../composables/useSeo.js'
+
+useSeo({
+  title: 'Projects',
+  description:
+    'Open-source projects by Ryan Dickinson — including shelloveu (a C++ Unix shell), the Safe Ice Tool community platform, BeeManager, and more.',
+})
 </script>

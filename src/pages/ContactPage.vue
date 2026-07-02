@@ -83,6 +83,12 @@
 
 <script setup>
 import { ref, reactive } from 'vue'
+import { useSeo } from '../composables/useSeo.js'
+
+useSeo({
+  title: 'Contact',
+  description: 'Get in touch with Ryan Dickinson — for collaboration, questions, or open-source work.',
+})
 
 const submitted = ref(false)
 const form = reactive({

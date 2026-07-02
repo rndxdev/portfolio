@@ -116,6 +116,13 @@
 import { ref, computed } from 'vue'
 import FadeInOnScroll from '../components/shared/FadeInOnScroll.vue'
 import { usePosts } from '../composables/usePosts.js'
+import { useSeo } from '../composables/useSeo.js'
+
+useSeo({
+  title: 'Blog',
+  description:
+    'Writing by Ryan Dickinson about code, open source, and building things that matter — from C++ shells to community platforms.',
+})
 
 const { posts } = usePosts()
 const activeTag = ref(null)

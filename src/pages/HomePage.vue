@@ -27,6 +27,48 @@ import FeaturedProjects from '../components/home/FeaturedProjects.vue'
 import FadeInOnScroll from '../components/shared/FadeInOnScroll.vue'
 import PostList from '../components/blog/PostList.vue'
 import { usePosts } from '../composables/usePosts.js'
+import { useHead } from '@unhead/vue'
+import { useSeo } from '../composables/useSeo.js'
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION, PROFILES } from '../site.config.js'
 
 const { posts } = usePosts()
+
+useSeo()
+
+// schema.org entity data — tells Google "this site IS the developer Ryan Dickinson".
+useHead({
+  script: [
+    {
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@graph': [
+          {
+            '@type': 'Person',
+            '@id': `${SITE_URL}/#person`,
+            name: SITE_NAME,
+            url: SITE_URL,
+            jobTitle: 'Full-Stack Developer',
+            description: SITE_DESCRIPTION,
+            address: {
+              '@type': 'PostalAddress',
+              addressRegion: 'Michigan',
+              addressCountry: 'US',
+            },
+            knowsAbout: ['Vue.js', 'Laravel', 'PHP', 'JavaScript', 'C++', 'PostgreSQL', 'Linux'],
+            sameAs: Object.values(PROFILES),
+          },
+          {
+            '@type': 'WebSite',
+            '@id': `${SITE_URL}/#website`,
+            url: SITE_URL,
+            name: SITE_NAME,
+            description: SITE_DESCRIPTION,
+            author: { '@id': `${SITE_URL}/#person` },
+          },
+        ],
+      }),
+    },
+  ],
+})
 </script>
