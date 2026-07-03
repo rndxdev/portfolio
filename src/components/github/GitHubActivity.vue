@@ -33,16 +33,8 @@
       </div>
     </dl>
 
-    <!-- Contribution graph -->
-    <div v-if="graphOk" class="mt-6 rounded-lg border border-border bg-surface p-4 overflow-x-auto">
-      <img
-        :src="graphUrl"
-        :alt="`${username}'s GitHub contribution graph for the past year`"
-        loading="lazy"
-        class="w-full min-w-[560px] h-auto"
-        @error="graphOk = false"
-      />
-    </div>
+    <!-- Contribution graph (real GitHub data, fetched at build time) -->
+    <GitHubContributions class="mt-6" />
 
     <!-- Top repositories -->
     <div v-if="topRepos.length" class="mt-6">
@@ -94,6 +86,7 @@
 
 <script setup>
 import { ref, computed, onMounted } from 'vue'
+import GitHubContributions from './GitHubContributions.vue'
 
 const props = defineProps({
   username: { type: String, required: true },
@@ -101,13 +94,10 @@ const props = defineProps({
 
 const loading = ref(true)
 const error = ref(false)
-const graphOk = ref(true)
 const stats = ref({ stars: 0, repos: 0, followers: 0, forks: 0 })
 const topRepos = ref([])
 
 const profileUrl = computed(() => `https://github.com/${props.username}`)
-// Contribution heatmap themed to the site accent (#939dfa)
-const graphUrl = computed(() => `https://ghchart.rshah.org/939dfa/${props.username}`)
 
 const statList = computed(() => [
   { label: 'Stars', value: stats.value.stars },
@@ -155,7 +145,6 @@ onMounted(async () => {
       .slice(0, 4)
   } catch {
     error.value = true
-    graphOk.value = false
   } finally {
     loading.value = false
   }
