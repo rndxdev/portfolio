@@ -31,6 +31,10 @@ useSeo({
   title: 'Certifications',
   description:
     'Verified coursework and credentials earned by Ryan Dickinson — covering Node.js, React, Vue, Laravel, PHP, JavaScript, and web accessibility.',
+  breadcrumbs: [
+    { name: 'Home', path: '/' },
+    { name: 'Certifications', path: '/certifications' },
+  ],
 })
 
 // Lead with the longest courses (depth over recency).

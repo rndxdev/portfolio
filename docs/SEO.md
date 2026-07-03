@@ -53,6 +53,42 @@ consistent name + role.
 Each blog post under your name adds a page that resolves to "you" and builds topical
 authority. Posts are already prerendered with `BlogPosting` schema and a byline.
 
+## Analytics (self-hosted, privacy-friendly)
+
+Wiring is in place but **off until configured** (`ANALYTICS` in `src/site.config.js`).
+Recommended: self-host **Umami** on your VPS.
+
+1. On the VPS: run Umami (Docker is easiest — `ghcr.io/umami-software/umami:postgresql-latest`
+   + a Postgres container), behind nginx with TLS at e.g. `https://analytics.rndx.dev`.
+2. In Umami, add a website for `rndx.dev` — it gives you a **website ID** and a
+   `script.js` URL.
+3. Set both in `src/site.config.js`:
+   ```js
+   export const ANALYTICS = {
+     src: 'https://analytics.rndx.dev/script.js',
+     websiteId: 'xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx',
+   }
+   ```
+4. Redeploy. The script injects site-wide (no cookie banner needed — Umami is
+   cookieless). Leave the fields empty to keep analytics off.
+
+No VPS effort wanted? **Cloudflare Web Analytics** is free and zero-maintenance —
+paste its snippet the same way (set `ANALYTICS.src` to their beacon URL).
+
+## Other additions (already live in code)
+
+- **RSS feed** at `/rss.xml` (auto-generated from posts; linked in `<head>`).
+- **Résumé** at `/resume` — fill in `experience` / `education` in `src/data/resume.js`
+  (skills/projects/certs populate automatically). "Download / Print PDF" uses the
+  browser's print-to-PDF with print styles.
+- **Project screenshots** — add `image: "/projects/<name>.png"` to a project in
+  `src/data/projects.js` and drop the file in `public/projects/`. Placeholder shows
+  until then.
+- **OG images** — real 1200×630 PNGs generated at build (site + one per post),
+  rendered with resvg. No manual work.
+- **⌘K command palette** — jump to any page/post/link; also a button in the navbar.
+- **BreadcrumbList schema** on every interior page for richer search results.
+
 ## After deploy — verify
 - **Rich Results Test:** https://search.google.com/test/rich-results — paste your URL,
   confirm the `Person` / `BlogPosting` items are detected.

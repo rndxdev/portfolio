@@ -17,5 +17,9 @@ useSeo({
   title: 'Projects',
   description:
     'Open-source projects by Ryan Dickinson — including shelloveu (a C++ Unix shell), the Safe Ice Tool community platform, BeeManager, and more.',
+  breadcrumbs: [
+    { name: 'Home', path: '/' },
+    { name: 'Projects', path: '/projects' },
+  ],
 })
 </script>

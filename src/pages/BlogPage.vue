@@ -122,6 +122,10 @@ useSeo({
   title: 'Blog',
   description:
     'Writing by Ryan Dickinson about code, open source, and building things that matter — from C++ shells to community platforms.',
+  breadcrumbs: [
+    { name: 'Home', path: '/' },
+    { name: 'Blog', path: '/blog' },
+  ],
 })
 
 const { posts } = usePosts()

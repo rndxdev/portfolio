@@ -1,9 +1,27 @@
 <template>
   <article
-    class="group gradient-border rounded-xl bg-surface transition-all duration-300 hover:-translate-y-1"
-    :class="{ 'overflow-hidden': project.type === 'game' }"
+    class="group gradient-border rounded-xl bg-surface overflow-hidden transition-all duration-300 hover:-translate-y-1"
   >
+    <!-- Media: live canvas for the game, a real screenshot if provided, else a branded placeholder -->
     <GamePreview v-if="project.type === 'game'" :live-url="project.live" />
+    <img
+      v-else-if="project.image"
+      :src="project.image"
+      :alt="`${project.title} screenshot`"
+      loading="lazy"
+      class="w-full h-44 object-cover object-top border-b border-border"
+    />
+    <div
+      v-else
+      class="relative h-44 flex items-center justify-center overflow-hidden border-b border-border bg-gradient-to-br from-accent/15 via-cyan/10 to-emerald/15"
+      aria-hidden="true"
+    >
+      <span class="font-mono text-lg text-text/70 tracking-wide px-6 text-center">{{ project.title }}</span>
+      <div
+        class="absolute inset-0 opacity-[0.12]"
+        style="background-image: radial-gradient(circle at 1px 1px, #fff 1px, transparent 0); background-size: 16px 16px"
+      />
+    </div>
 
     <div class="p-6">
       <div class="flex items-start justify-between mb-3">

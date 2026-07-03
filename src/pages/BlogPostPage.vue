@@ -48,6 +48,12 @@ useSeo({
   title: post ? post.title : 'Post not found',
   description: post ? post.description : undefined,
   type: 'article',
+  image: post ? `/og/${post.slug}.png` : undefined,
+  breadcrumbs: [
+    { name: 'Home', path: '/' },
+    { name: 'Blog', path: '/blog' },
+    ...(post ? [{ name: post.title, path: route.path }] : []),
+  ],
 })
 
 // BlogPosting schema so each article is understood as content authored by Ryan.

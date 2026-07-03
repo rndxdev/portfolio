@@ -121,6 +121,10 @@ useSeo({
   title: 'About',
   description:
     'Ryan Dickinson is a full-stack developer from Michigan focused on open-source tools, built with Laravel, Vue, and C++. Get to know his work, stack, and GitHub activity.',
+  breadcrumbs: [
+    { name: 'Home', path: '/' },
+    { name: 'About', path: '/about' },
+  ],
 })
 
 const githubUsername = 'rndxdev'

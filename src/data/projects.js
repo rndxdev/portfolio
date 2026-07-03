@@ -1,3 +1,6 @@
+// Add a screenshot to any project with:  image: "/projects/<name>.png"
+// Drop the file in public/projects/ (a ~16:9 crop looks best). Without an
+// image, cards show a branded placeholder. Games use the live canvas preview.
 export const projects = [
   {
     title: "shelloveu",

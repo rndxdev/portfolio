@@ -1,7 +1,7 @@
 import { ViteSSG } from 'vite-ssg'
 import App from './App.vue'
 import { routes } from './router'
-import { SITE_TITLE, SITE_DESCRIPTION, SITE_URL, SITE_NAME, OG_IMAGE, SITE_LOCALE } from './site.config'
+import { SITE_TITLE, SITE_DESCRIPTION, SITE_URL, SITE_NAME, OG_IMAGE, SITE_LOCALE, ANALYTICS } from './site.config'
 import './styles/global.css'
 
 export const createApp = ViteSSG(
@@ -29,6 +29,11 @@ export const createApp = ViteSSG(
         { name: 'twitter:description', content: SITE_DESCRIPTION },
         { name: 'twitter:image', content: SITE_URL + OG_IMAGE },
       ],
+      link: [{ rel: 'alternate', type: 'application/rss+xml', title: `${SITE_NAME} — Blog`, href: `${SITE_URL}/rss.xml` }],
+      // Privacy-friendly analytics — injected only when configured (see site.config.js).
+      script: ANALYTICS.src
+        ? [{ src: ANALYTICS.src, 'data-website-id': ANALYTICS.websiteId, defer: true, async: true }]
+        : [],
     })
   },
 )

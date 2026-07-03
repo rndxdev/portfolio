@@ -88,6 +88,10 @@ import { useSeo } from '../composables/useSeo.js'
 useSeo({
   title: 'Contact',
   description: 'Get in touch with Ryan Dickinson — for collaboration, questions, or open-source work.',
+  breadcrumbs: [
+    { name: 'Home', path: '/' },
+    { name: 'Contact', path: '/contact' },
+  ],
 })
 
 const submitted = ref(false)

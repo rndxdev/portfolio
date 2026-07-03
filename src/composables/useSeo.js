@@ -12,6 +12,7 @@ import { SITE_URL, SITE_NAME, SITE_TITLE, SITE_DESCRIPTION, OG_IMAGE } from '../
  * @param {string} [opts.description]  Meta description; falls back to the site default.
  * @param {string} [opts.type]         Open Graph type ('website' | 'article').
  * @param {string} [opts.image]        OG image path or absolute URL; defaults to site image.
+ * @param {{name:string,path:string}[]} [opts.breadcrumbs]  Trail for BreadcrumbList schema.
  */
 export function useSeo(opts = {}) {
   const route = useRoute()
@@ -28,8 +29,27 @@ export function useSeo(opts = {}) {
   })
   const type = computed(() => unref(opts.type) || 'website')
 
+  const script = []
+  const crumbs = unref(opts.breadcrumbs)
+  if (crumbs && crumbs.length) {
+    script.push({
+      type: 'application/ld+json',
+      innerHTML: JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'BreadcrumbList',
+        itemListElement: crumbs.map((c, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          name: c.name,
+          item: SITE_URL + c.path,
+        })),
+      }),
+    })
+  }
+
   useHead({
     title: fullTitle,
+    script,
     meta: [
       { name: 'description', content: description },
       { property: 'og:title', content: fullTitle },

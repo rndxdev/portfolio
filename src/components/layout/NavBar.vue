@@ -16,6 +16,18 @@
         >
           {{ link.label }}
         </router-link>
+        <button
+          type="button"
+          @click="palette.open()"
+          aria-label="Open command palette"
+          aria-keyshortcuts="Meta+K Control+K"
+          class="flex items-center gap-2 text-xs text-muted hover:text-text border border-border hover:border-accent/50 rounded-lg px-2.5 py-1.5 transition-colors duration-300"
+        >
+          <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+          </svg>
+          <kbd class="font-mono">⌘K</kbd>
+        </button>
       </div>
 
       <!-- Mobile hamburger -->
@@ -57,12 +69,15 @@
 
 <script setup>
 import { ref } from 'vue'
+import { useCommandPalette } from '../../composables/useCommandPalette.js'
 
+const palette = useCommandPalette()
 const mobileOpen = ref(false)
 const links = [
   { to: '/about', label: 'About' },
   { to: '/projects', label: 'Projects' },
   { to: '/certifications', label: 'Certs' },
+  { to: '/resume', label: 'Résumé' },
   { to: '/blog', label: 'Blog' },
   { to: '/contact', label: 'Contact' },
 ]

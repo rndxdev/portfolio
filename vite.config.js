@@ -2,12 +2,17 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import tailwindcss from '@tailwindcss/vite'
 import Sitemap from 'vite-plugin-sitemap'
-import { readdirSync, readFileSync } from 'node:fs'
+import { marked } from 'marked'
+import { Resvg } from '@resvg/resvg-js'
 import { fileURLToPath } from 'node:url'
 import { dirname, resolve } from 'node:path'
-import { SITE_URL } from './src/site.config.js'
+import { readPosts } from './src/lib/postsNode.js'
+import { SITE_URL, SITE_NAME, SITE_DESCRIPTION } from './src/site.config.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
+const BLOG_DIR = resolve(__dirname, 'src/content/blog')
+const xmlEscape = (s) =>
+  String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 
 // Fetch the real GitHub contribution calendar (public, no token) at build time and
 // expose it as `virtual:github-contributions`. Parses GitHub's own HTML fragment.
@@ -78,25 +83,127 @@ function githubContributions(username) {
   }
 }
 
-// Enumerate published blog posts so they can be prerendered and listed in the sitemap.
-function blogRoutes() {
-  const dir = resolve(__dirname, 'src/content/blog')
-  return readdirSync(dir)
-    .filter((f) => f.endsWith('.md'))
-    .filter((f) => !/^published:\s*false\s*$/m.test(readFileSync(resolve(dir, f), 'utf-8')))
-    .map((f) => '/blog/' + f.replace(/\.md$/, '').replace(/^\d{4}-\d{2}-\d{2}-/, ''))
+// Published blog posts → routes, for prerendering and the sitemap.
+const dynamicRoutes = readPosts(BLOG_DIR).map((p) => '/blog/' + p.slug)
+
+// Generate an RSS 2.0 feed from the blog at build time.
+function rssFeed() {
+  return {
+    name: 'rss-feed',
+    generateBundle() {
+      const posts = readPosts(BLOG_DIR)
+      const items = posts
+        .map((p) => {
+          const url = `${SITE_URL}/blog/${p.slug}`
+          return `    <item>
+      <title>${xmlEscape(p.title)}</title>
+      <link>${url}</link>
+      <guid isPermaLink="true">${url}</guid>
+      <pubDate>${new Date(p.date + 'T00:00:00Z').toUTCString()}</pubDate>
+      <description>${xmlEscape(p.description)}</description>
+${p.tags.map((t) => `      <category>${xmlEscape(t)}</category>`).join('\n')}
+      <content:encoded><![CDATA[${marked(p.content)}]]></content:encoded>
+    </item>`
+        })
+        .join('\n')
+      const xml = `<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:content="http://purl.org/rss/1.0/modules/content/" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>${xmlEscape(SITE_NAME)} — Blog</title>
+    <link>${SITE_URL}/blog</link>
+    <description>${xmlEscape(SITE_DESCRIPTION)}</description>
+    <language>en-us</language>
+    <atom:link href="${SITE_URL}/rss.xml" rel="self" type="application/rss+xml"/>
+${items}
+  </channel>
+</rss>`
+      this.emitFile({ type: 'asset', fileName: 'rss.xml', source: xml })
+    },
+  }
 }
 
-const dynamicRoutes = blogRoutes()
+// Wrap text into at most `maxLines` lines of ~`perLine` characters.
+function wrapText(text, perLine, maxLines) {
+  const words = String(text).split(/\s+/)
+  const lines = []
+  let line = ''
+  for (const w of words) {
+    if ((line + ' ' + w).trim().length > perLine && line) {
+      lines.push(line)
+      line = w
+    } else {
+      line = (line + ' ' + w).trim()
+    }
+    if (lines.length === maxLines - 1 && (line + ' ').length > perLine) break
+  }
+  if (line) lines.push(line)
+  if (lines.length > maxLines) {
+    lines.length = maxLines
+    lines[maxLines - 1] = lines[maxLines - 1].replace(/.{1}$/, '…')
+  }
+  return lines.slice(0, maxLines)
+}
+
+// Rasterize a 1200×630 branded social card to PNG (resvg + system fonts).
+function renderCard({ kicker, title, subtitle }) {
+  const lines = wrapText(title, 22, 3)
+  const size = lines.length >= 3 ? 74 : lines.length === 2 ? 92 : 104
+  const startY = 300 - (lines.length - 1) * (size * 0.6)
+  const titleSvg = lines
+    .map((l, i) => `<text x="80" y="${startY + i * size * 1.15}" font-family="Ubuntu, sans-serif" font-size="${size}" font-weight="700" fill="url(#g)">${xmlEscape(l)}</text>`)
+    .join('')
+  const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#939dfa"/><stop offset="50%" stop-color="#22d3ee"/><stop offset="100%" stop-color="#34d399"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="15%" cy="20%" r="60%">
+      <stop offset="0%" stop-color="#939dfa" stop-opacity="0.20"/><stop offset="100%" stop-color="#939dfa" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <rect x="4" y="4" width="1192" height="622" rx="24" fill="none" stroke="#3a3a3a" stroke-width="2"/>
+  <text x="80" y="130" font-family="Ubuntu Mono, monospace" font-size="26" fill="#939dfa" letter-spacing="2">${xmlEscape(kicker)}</text>
+  ${titleSvg}
+  <text x="80" y="540" font-family="Ubuntu, sans-serif" font-size="34" fill="#a3a3a3">${xmlEscape(subtitle)}</text>
+</svg>`
+  return new Resvg(svg, { fitTo: { mode: 'width', value: 1200 }, font: { loadSystemFonts: true, defaultFontFamily: 'Ubuntu' } })
+    .render()
+    .asPng()
+}
+
+// Generate the site card + one card per blog post as real PNGs.
+function ogImages() {
+  return {
+    name: 'og-images',
+    generateBundle() {
+      this.emitFile({
+        type: 'asset',
+        fileName: 'og-image.png',
+        source: renderCard({ kicker: '$ whoami', title: SITE_NAME, subtitle: 'Full-Stack Developer · Michigan' }),
+      })
+      for (const p of readPosts(BLOG_DIR)) {
+        this.emitFile({
+          type: 'asset',
+          fileName: `og/${p.slug}.png`,
+          source: renderCard({ kicker: 'BLOG · rndx.dev', title: p.title, subtitle: SITE_NAME }),
+        })
+      }
+    },
+  }
+}
 
 export default defineConfig({
   plugins: [
     vue(),
     tailwindcss(),
     githubContributions('rndxdev'),
+    rssFeed(),
+    ogImages(),
     Sitemap({
       hostname: SITE_URL,
-      dynamicRoutes: ['/about', '/projects', '/certifications', '/blog', '/contact', ...dynamicRoutes],
+      dynamicRoutes: ['/about', '/projects', '/certifications', '/resume', '/blog', '/contact', ...dynamicRoutes],
       exclude: ['/:pathMatch(.*)*'],
       readable: true,
     }),
