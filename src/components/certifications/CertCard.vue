@@ -31,8 +31,8 @@
       </li>
     </ul>
 
-    <div class="mt-auto pt-2 flex items-center justify-between gap-4">
-      <p v-if="cert.credentialId" class="text-xs font-mono text-muted truncate">
+    <div class="mt-auto pt-2 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-4">
+      <p v-if="cert.credentialId" class="min-w-0 max-w-full truncate text-xs font-mono text-muted">
         <span class="sr-only">Credential ID: </span>ID: {{ cert.credentialId }}
       </p>
       <a
