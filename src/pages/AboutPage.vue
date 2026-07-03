@@ -106,7 +106,11 @@
       <p>
         When I'm not writing code, I'm usually outside — fishing, hiking, hunting, and exploring the beautiful outdoors
         that is Michigan. I enjoy nature and embrace community. I think spending time outdoors makes me a better developer.
-        It keeps things in perspective and gives me ideas for problems worth solving.
+        It keeps things in perspective and gives me ideas for problems worth solving. Lately I've also been learning
+        Spanish on
+        <a href="https://www.duolingo.com" target="_blank" rel="noopener noreferrer"
+          aria-label="Duolingo (opens in new tab)"
+          class="text-accent hover:text-text hover:underline transition-colors duration-300">Duolingo</a>.
       </p>
     </div>
   </div>
